@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="error" v-if="error">{{error.message}}</div>
-		<form @submit.prevent="pressed">
+		<!--<form @submit.prevent="pressed">
 			SIGN UP
 			<div class="email">
 				<input type="email" v-model="email" placeholder="email" />
@@ -10,7 +10,22 @@
 				<input type="password" v-model="password" placeholder="password" />
 			</div>
 			<button type="submit">SIGNUP</button>
-		</form>
+		</form>-->
+		<v-form class="">
+			<v-layout wrap row>
+				<v-flex xs12 sm6>
+					<v-text-field v-model="email" :rules="emailRules" label="E-mail" required class="mx-7"></v-text-field>
+				</v-flex>
+				<v-flex xs12 sm6>
+					<v-text-field v-model="password" :counter="10" :rules="nameRules" label="Password" required class="mx-7"></v-text-field>
+				</v-flex>
+			</v-layout>
+			<v-layout wrap row justify-center>
+				<v-flex xs2 sm1>
+					<v-btn @click="pressed()" small class="body-2" color="success">Submit</v-btn>
+				</v-flex>
+			</v-layout>
+		</v-form>
 	</div>
 </template>
 
@@ -48,16 +63,4 @@
 		font-size: 18px;
 	}
 	
-	input {
-		width: 400px;
-		padding: 30px;
-		margin: 20px;
-		font-size: 21px;
-	}
-	
-	button {
-		width: 400px;
-		height: 75px;
-		font-size: 100%;
-	}
 </style>
