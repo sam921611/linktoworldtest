@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<div>
-			<div class="error" v-if="error">{{ error.message }}</div>
+			<div class="error" v-if="error">{{ error }}</div>
 			<!--<form @submit.prevent="pressed">
 			LOGIN
 			<div class="email"><input type="email" v-model="email" placeholder="email" /></div>
@@ -10,7 +10,7 @@
 			<button @click="google()">Google login</button>
 		</form>-->
 
-			<v-form ref="form" v-model="valid" lazy-validation class="my-10" >
+			<v-form ref="form" v-model="valid" lazy-validation class="my-10">
 				<v-layout wrap row>
 					<v-flex xs12 sm6>
 						<v-text-field v-model="email" :rules="emailRules" label="E-mail" required class="mx-2"></v-text-field>
@@ -56,9 +56,8 @@
 	</v-container>
 </template>
 <script>
-	import * as firebase from 'firebase/app';
-	import 'firebase/auth';
-
+//	import * as firebase from 'firebase/app';
+//	import 'firebase/auth';
 	export default {
 		data() {
 			return {
@@ -99,32 +98,26 @@
 				this.$refs.form.resetValidation()
 			},
 
-		pressed() {
-			firebase
-				.auth()
-				.signInWithEmailAndPassword(this.email, this.password)
-				.then(() => {
-					this.$router.replace({
-						name: 'home'
-					});
-				})
-				.catch(error => (this.error = error));
-		},
-		google() {
-			var provider = new firebase.auth.GoogleAuthProvider();
-			firebase
-				.auth()
-				.signInWithPopup(provider)
-				.then(() => {
-					// var token = result.credential.accessToken;
-					// var user = result.user;
-					this.$router.replace({
-						name: 'home'
-					});
-				})
-				.catch(error => (this.error = error));
-		},
-	}
+			pressed() {
+				//			firebase
+				//				.auth()
+				//				.signInWithEmailAndPassword(this.email, this.password)
+				//				.then(() => {
+				//					this.$router.replace({
+				//						name: 'home'
+				//					});
+				//				})
+				//				.catch(error => (this.error = error));
+				const user = {
+					email: this.email,
+					password: this.password
+				}
+				this.$store.dispatch('signInAction', user)
+			},
+			google() {
+				this.$store.dispatch('googleSignInAction')
+			},
+		}
 	}
 </script>
 

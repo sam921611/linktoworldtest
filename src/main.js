@@ -4,6 +4,7 @@ import router from './router'
 import vuetify from './plugins/vuetify';
 import axios from 'axios'
 import firebase from 'firebase/app'
+import store from '@/store'
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
@@ -17,10 +18,9 @@ const firebaseConfig = {
 	messagingSenderId: "798585863063",
 	appId: "1:798585863063:web:080699a1f00cca2b4c22d2"
 };
-
 firebase.initializeApp(firebaseConfig);
-
 new Vue({
+	store,
 	router,
 	vuetify,
 	render: h => h(App)

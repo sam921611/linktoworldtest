@@ -11,7 +11,20 @@
 						<v-list-item-title>{{item.title}}</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
+				</v-list>
+				<!--v-if要放在v-for外面那層 不然報錯-->
+				<!--這邊處理auth 登入 註冊顯示～-->
+				<v-list v-if="!userLogedIn">
+				<v-list-item  v-for="authItem in authItems" :key="authItem.title" :to="authItem.link">
+					<v-list-item-action>
+						<v-icon>{{authItem.icon}}</v-icon>
+					</v-list-item-action>
+					<v-list-item-content>
+						<v-list-item-title>{{authItem.title}}</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
 			</v-list>
+			
 		</v-navigation-drawer>
 
 		<v-app-bar app clipped-left>
@@ -27,6 +40,12 @@
 					<v-icon left dark>{{ item.icon }}</v-icon>
 					{{ item.title }}
 				</v-btn>
+				<div v-if="!userLogedIn">
+				<v-btn flat v-for="authItem in authItems" :key="authItem.title" :to="authItem.link" large>
+					<v-icon left dark>{{ authItem.icon }}</v-icon>
+					{{ authItem.title }}
+				</v-btn>
+				</div>
 			</v-toolbar-items>
 			<v-spacer></v-spacer>
 			<v-spacer></v-spacer>
@@ -45,9 +64,6 @@
 
 <script>
 	export default {
-		props: {
-
-		},
 		data: () => ({
 			drawer: false,
 			menuItems: [{
@@ -60,21 +76,21 @@
 					title: 'Product 產品',
 					link: '/product'
 				},
-				{
-					icon: 'arrow_upward',
-					title: 'Sign up   註冊',
-					link: '/signup'
-				},
-				{
-					icon: 'lock_open',
-					title: 'login 登入',
-					link: '/login'
-				},
 //				{
-//					icon: 'monetization_on',
-//					title: 'Bitcoin  比特幣',
-//					link: '/bitcoin'
+//					icon: 'arrow_upward',
+//					title: 'Sign up   註冊',
+//					link: '/signup'
 //				},
+//				{
+//					icon: 'lock_open',
+//					title: 'login 登入',
+//					link: '/login'
+//				},
+				//				{
+				//					icon: 'monetization_on',
+				//					title: 'Bitcoin  比特幣',
+				//					link: '/bitcoin'
+				//				},
 				{
 					icon: 'person',
 					title: 'Contact聯絡我們',
@@ -90,8 +106,24 @@
 				//					title: 'chat 聊天室',
 				//					link: '/chat'
 				//				},
+			],
+			authItems: [{
+					icon: 'arrow_upward',
+					title: 'Sign up   註冊',
+					link: '/signup'
+				},
+				{
+					icon: 'lock_open',
+					title: 'login 登入',
+					link: '/login'
+				}
 			]
 		}),
+		computed:{
+			userLogedIn() {
+				return this.$store.getters.user
+			}
+		},
 		created() {
 			this.$vuetify.theme.dark = true
 		},

@@ -22,7 +22,7 @@
 			</v-layout>
 			<v-layout wrap row justify-center>
 				<v-flex xs2 sm1>
-					<v-btn @click="pressed()" small class="body-2" color="success">Submit</v-btn>
+					<v-btn @click="signup()" small class="body-2" color="success">Submit</v-btn>
 				</v-flex>
 			</v-layout>
 		</v-form>
@@ -30,9 +30,6 @@
 </template>
 
 <script>
-	import * as firebase from "firebase/app";
-	import "firebase/auth";
-
 	export default {
 		data() {
 			return {
@@ -42,16 +39,21 @@
 			};
 		},
 		methods: {
-			pressed() {
-				firebase
-					.auth()
-					.createUserWithEmailAndPassword(this.email, this.password)
-					.then(() => {
-						this.$router.replace({
-							name: "home"
-						});
-					})
-					.catch(error => (this.error = error));
+			signup() {
+				//				firebase
+				//					.auth()
+				//					.createUserWithEmailAndPassword(this.email, this.password)
+				//					.then(() => {
+				//						this.$router.replace({
+				//							name: "home"
+				//						});
+				//					})
+				//					.catch(error => (this.error = error));
+				const user = {
+					email: this.email,
+					password: this.password
+				}
+				this.$store.dispatch('signUpAction', user)
 			}
 		}
 	};
@@ -62,5 +64,4 @@
 		color: red;
 		font-size: 18px;
 	}
-	
 </style>
