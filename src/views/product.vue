@@ -21,7 +21,8 @@
 		<v-divider class="my-0 mx-4"></v-divider>
 
 		<v-card-text align="center">
-			<v-chip class="ma-0" @click="vpn1">
+			<!--可在這放methods-->
+			<v-chip class="ma-0">
 				<v-icon left>vpn_key</v-icon>
 				Choose plan
 			</v-chip>
@@ -30,8 +31,6 @@
 </template>
 <script>
 	export default {
-		methods: {
 
-		},
 	}
 </script>

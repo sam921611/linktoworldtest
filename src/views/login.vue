@@ -1,6 +1,5 @@
 <template>
 	<v-container>
-		<div>
 			<div class="error" v-if="error">{{ error }}</div>
 			<!--<form @submit.prevent="pressed">
 			LOGIN
@@ -52,7 +51,6 @@
 					</v-flex>
 				</v-layout>
 			</v-form>
-		</div>
 	</v-container>
 </template>
 <script>

@@ -5,7 +5,7 @@
 				<!------------------跑馬燈開始----------------->
 				<v-card elevation="24" max-width="444" class="mx-auto">
 					<v-system-bar lights-out></v-system-bar>
-					<v-carousel interval="3000" continuous="true" :cycle="cycle" :show-arrows="false" hide-delimiter-background delimiter-icon="mdi-minus" height="170">
+					<v-carousel interval="3000" :continuous="true" :cycle="cycle" :show-arrows="false" hide-delimiter-background delimiter-icon="mdi-minus" height="170">
 						<v-carousel-item v-for="(slide, i) in slides" :key="i" :src="slide">
 							<!--<v-sheet :color="colors[i]" height="100%" tile>-->
 							<!--<v-row class="fill-height" align="center" justify="center">

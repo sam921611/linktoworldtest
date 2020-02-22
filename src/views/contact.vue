@@ -1,7 +1,7 @@
 <template>
 	<v-container wrap color="grey">
-		<v-text-title class="grey--text">We will respond to your email ASAP. 我們將會盡快由電子信箱和您聯絡 </v-text-title>
 		<v-form ref="form" v-model="valid" lazy-validation class="mt-10">
+			We will respond to your email ASAP. 我們將會盡快由電子信箱和您聯絡 
 			<v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name 姓名" required></v-text-field>
 			<v-text-field v-model="email" :rules="emailRules" label="E-mail 電子信箱" required></v-text-field>
 			<v-select v-model="select" :items="items" :rules="[v => !!v || 'This selection is required 請輸入此項']" label="Option 項目" required></v-select>
@@ -9,7 +9,6 @@
 			<v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
 				Send 發出
 			</v-btn>
-
 		</v-form>
 	</v-container>
 </template>
