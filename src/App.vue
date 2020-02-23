@@ -1,5 +1,6 @@
 <template>
-	<v-app id="inspire">
+	<!--v-resize監聽頁面大小，想解決自適應bug，調適中-->
+	<v-app id="inspire" >
 		<v-navigation-drawer v-model="drawer" app clipped right>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 			<v-list dense>
@@ -14,11 +15,11 @@
 			</v-list>
 			<!--------------------------->
 			<v-list dense v-if="userLogedIn">
-				<v-list-item to="/">
+				<v-list-item @click="logout" to="/">
 					<v-list-item-action>
 						<v-icon>person</v-icon>
 					</v-list-item-action>
-					<v-list-item-content>
+					<v-list-item-content >
 						<v-list-item-title>logout</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
@@ -57,7 +58,7 @@
 					</div>
 				</v-btn>
 
-				<v-btn flat large>
+				<v-btn flat large @click="logout">
 					<div v-if="userLogedIn">
 						<v-icon left dark>person</v-icon>
 						logout
@@ -143,13 +144,17 @@
 				return this.$store.getters.user
 			}
 		},
-		//		methods: {
-		//			drawerfalse (){
-		//				this.drawer = null
-		//			}
-		//		},
+				methods: {
+					drawerfalse (){
+						this.drawer = false
+					},
+					logout(){
+						this.$store.dispatch('signOutAction')
+					}
+				},
 		created() {
 			this.$vuetify.theme.dark = true;
+			this.drawerfalse();
 		},
 	}
 </script>

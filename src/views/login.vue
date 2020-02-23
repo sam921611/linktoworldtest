@@ -113,7 +113,9 @@
 				this.$store.dispatch('signInAction', user)
 			},
 			google() {
-				this.$store.dispatch('googleSignInAction')
+				this.$store.dispatch('googleSignInAction');
+//				這邊之後要異步調整
+				this.$router.replace('/')
 			},
 		}
 	}

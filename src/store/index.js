@@ -9,7 +9,27 @@ export default new Vuex.Store({
 	state: {
 		user: null,
 		status: null,
-		error: null
+		error: null,
+		//		-----
+//		Home頁面資料遷移
+//		show: false,
+//		news: [{
+//				title: 'We are now testing features and will release soon!',
+//				content: 'vpn news test'
+//			},
+//			{
+//				title: 'news2',
+//				content: 'vpn news test2'
+//			}
+//		],
+//		//		---
+//		cycle: true,
+//		slides: ['https://i.epochtimes.com/assets/uploads/2018/01/7f680532e307b97a065e73919e4454c6-600x400.jpg',
+//			'https://affnotes.com/wp-content/uploads/2018/05/vpn-guide.jpg',
+//			'https://i.epochtimes.com/assets/uploads/2018/01/7f680532e307b97a065e73919e4454c6-600x400.jpg',
+//			'https://i.epochtimes.com/assets/uploads/2018/01/7f680532e307b97a065e73919e4454c6-600x400.jpg',
+//			'https://i.epochtimes.com/assets/uploads/2018/01/7f680532e307b97a065e73919e4454c6-600x400.jpg'
+//		]
 	},
 
 	mutations: {
@@ -40,7 +60,6 @@ export default new Vuex.Store({
 				//    then裡面的response因報錯有先刪掉
 				//				response.user.uid因報錯有先刪掉
 				.then(() => {
-					alert('success')
 					// response will have user
 					// user will have uid will be updated to the state
 					commit('setUser')
@@ -79,44 +98,50 @@ export default new Vuex.Store({
 				.then((res) => {
 					// var token = result.credential.accessToken;
 					// var user = result.user;
-					commit('setUser',res.user.uid)
-//					這一段切換router會報錯 查明中
-//					this.$router.replace({
-//						name: 'home'
-//					}); 
+					commit('setUser', res.user.uid);
+					//					這一段切換router會報錯 查明中
+					//					this.$router.replace({
+					//						name: 'home'
+					//					}); 
 				})
 				.catch(error => (alert(error)));
 		},
 
-	signOutAction({
-		commit
-	}) {
-		firebase.auth().signOut()
-			//    then裡面的response因報錯有先刪掉
-			.then(() => {
-				commit('setUser', null)
-				commit('setStatus', 'success')
-				commit('setError', null)
-			})
-			.catch((error) => {
-				commit('setStatus', 'failure')
-				commit('setError', error.message)
-			})
-	}
-},
-
-getters: {
-
-	status(state) {
-		return state.status
+		signOutAction({
+			commit
+		}) {
+			firebase.auth().signOut()
+				//    then裡面的response因報錯有先刪掉
+				.then(() => {
+					commit('setUser', null)
+					commit('setStatus', 'success')
+					commit('setError', null)
+				})
+				.catch((error) => {
+					commit('setStatus', 'failure')
+					commit('setError', error.message)
+				})
+		}
 	},
 
-	user(state) {
-		return state.user
-	},
+	getters: {
 
-	error(state) {
-		return state.error
+		status(state) {
+			return state.status
+		},
+
+		user(state) {
+			return state.user
+		},
+
+		error(state) {
+			return state.error
+		},
+		show(state) {
+			return state.show
+		},
+		news(state) {
+			return state.news
+		},
 	}
-}
 })
