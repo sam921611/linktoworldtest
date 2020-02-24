@@ -26,7 +26,7 @@
 						<v-checkbox id="agree" v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
 					</v-flex>
 					<v-flex xs3 sm2>
-						<v-btn type="submit" color="success" @click="pressed()" class="mt-3 mr-3" small submit>Submit</v-btn>
+						<v-btn  color="success" @click="pressed()" class="mt-3 mr-3" small >Submit</v-btn>
 					</v-flex>
 					<v-flex xs4 sm3>
 						<v-btn @click="google()" color="success" class="mt-3" small>Google login</v-btn>
@@ -97,25 +97,15 @@
 			},
 
 			pressed() {
-				//			firebase
-				//				.auth()
-				//				.signInWithEmailAndPassword(this.email, this.password)
-				//				.then(() => {
-				//					this.$router.replace({
-				//						name: 'home'
-				//					});
-				//				})
-				//				.catch(error => (this.error = error));
 				const user = {
 					email: this.email,
 					password: this.password
 				}
-				this.$store.dispatch('signInAction', user)
+				this.$store.dispatch('signInAction', user).then(this.$router.replace('/'))
+//				錯誤訊息尚未抓取
 			},
 			google() {
-				this.$store.dispatch('googleSignInAction');
-//				這邊之後要異步調整
-				this.$router.replace('/')
+				this.$store.dispatch('googleSignInAction').then(this.$router.replace('/'))
 			},
 		}
 	}

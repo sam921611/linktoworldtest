@@ -41,8 +41,8 @@
 
 		<v-app-bar app clipped-left>
 			<!--<v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up" />-->
-			<v-toolbar-title>
-				<v-btn large>LinkToWorld</v-btn>
+			<v-toolbar-title class="ml-8">
+				<a href="/">LinkToWorld</a>
 			</v-toolbar-title>
 			<v-spacer></v-spacer>
 			<v-toolbar-items class="hidden-md-and-down">
@@ -149,7 +149,8 @@
 						this.drawer = false
 					},
 					logout(){
-						this.$store.dispatch('signOutAction')
+						this.$store.dispatch('signOutAction');
+						this.$router.push('/')
 					}
 				},
 		created() {
@@ -158,3 +159,9 @@
 		},
 	}
 </script>
+<style scoped>
+	a {
+		text-decoration: none;
+		color: white!important;
+	}
+</style>

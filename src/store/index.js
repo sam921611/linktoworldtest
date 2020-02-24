@@ -59,10 +59,10 @@ export default new Vuex.Store({
 			firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
 				//    then裡面的response因報錯有先刪掉
 				//				response.user.uid因報錯有先刪掉
-				.then(() => {
+				.then((response) => {
 					// response will have user
 					// user will have uid will be updated to the state
-					commit('setUser')
+					commit('setUser',response.user.uid)
 					commit('setStatus', 'success')
 					commit('setError', null)
 				})
@@ -76,9 +76,8 @@ export default new Vuex.Store({
 			commit
 		}, payload) {
 			firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-				//    then裡面的response因報錯有先刪掉
-				.then(() => {
-					commit('setUser')
+				.then((response) => {
+					commit('setUser',response.user.uid)
 					commit('setStatus', 'success')
 					commit('setError', null)
 				})

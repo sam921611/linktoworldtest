@@ -12,7 +12,7 @@
 			</div>
 			<button type="submit">SIGNUP</button>
 		</form>-->
-			<v-form class="">
+			<v-form ref="form" v-model="valid" lazy-validation>
 				<v-layout wrap row>
 					<v-flex xs12 sm6>
 						<v-text-field v-model="email" :rules="emailRules" label="E-mail" required class="mx-7"></v-text-field>
@@ -23,7 +23,7 @@
 				</v-layout>
 				<v-layout wrap row justify-center>
 					<v-flex xs2 sm1>
-						<v-btn @click="signup()" small class="body-2" color="success">Submit</v-btn>
+						<v-btn @click="submit" small class="body-2" color="success">Submit</v-btn>
 					</v-flex>
 				</v-layout>
 			</v-form>
@@ -45,7 +45,7 @@
 					v => !!v || 'password is required',
 					v => (v && v.length >= 10) || 'password must be more than 10 characters',
 				],
-				email: '',
+				email: "",
 				emailRules: [
 					v => !!v || 'E-mail is required',
 					v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -61,21 +61,13 @@
 			};
 		},
 		methods: {
-			signup() {
-				//				firebase
-				//					.auth()
-				//					.createUserWithEmailAndPassword(this.email, this.password)
-				//					.then(() => {
-				//						this.$router.replace({
-				//							name: "home"
-				//						});
-				//					})
-				//					.catch(error => (this.error = error));
+			submit() {
 				const user = {
 					email: this.email,
 					password: this.password
 				}
-				this.$store.dispatch('signUpAction', user)
+				this.$store.dispatch('signUpAction', user).then(this.$router.replace('/'))
+				//				錯誤訊息尚未抓取
 			}
 		}
 	};
