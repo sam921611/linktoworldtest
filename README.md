@@ -1,4 +1,7 @@
 # linktoworld
+
+![IMG_0236](https://user-images.githubusercontent.com/48044122/87875364-5cde3300-ca03-11ea-97cc-ad9ff6281190.GIF)
+
 Home
 
 ![スクリーンショット 2020-07-04 午後2 17 19](https://user-images.githubusercontent.com/48044122/86506382-88f19580-be01-11ea-8977-46780c9c3d1e.png)
